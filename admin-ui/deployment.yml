@@ -1,0 +1,32 @@
+kind: Deployment
+metadata:
+  name: admin-ui
+  labels:
+    app: admin-ui
+spec:
+  selector:
+    matchLabels:
+      app: admin-ui
+  template:
+    metadata:
+      labels:
+        app: admin-ui
+    spec:
+      volumes:
+        - name: admin-ui-vl
+          configMap:
+            name: admin-ui-cm
+      containers:
+      - image: vinitkulkarni/admin-ui
+        name: admin-ui
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+          runAsGroup: 1001
+        ports:
+        - containerPort: 3000
+          name: http
+        volumeMounts:
+          - name: admin-ui-vl
+            mountPath: /app/.env
+            subPath: .env
