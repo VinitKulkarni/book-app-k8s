@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-ui-cm
+  labels:
+    app: user-ui
+data:
+  .env: |
+      REACT_APP_API_URL= http://52.66.133.94:32001
